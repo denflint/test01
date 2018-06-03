@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BackGroundController : MonoBehaviour {
+public class BackGround : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,5 +14,9 @@ public class BackGroundController : MonoBehaviour {
 		if (transform.position.y < -10.5f ) {
 			transform.position = new Vector3 (0, 10.5f, 0);
 		}
+	}
+
+	public void screenUpdate() {
+
 	}
 }

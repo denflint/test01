@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Base : MonoBehaviour {
 
-	private GameObject player;
-	private Rigidbody2D playerRb2D;
-	private Vector2 newPosition;
-	public GameObject prefab;
-	private bool createFlag;		//1:新しいプレハブ生成可能
-	private GameObject[] baseArray = new GameObject[2];	//プレハブ保存用
+	private GameObject player;			//プレイヤー参照用
+	private Rigidbody2D playerRb2D;		//プレイヤーのrb
+	private Vector2 newPosition;		//次の足場の生成位置
+	public GameObject prefab;			//プレハブ生成
+	private bool createFlag;			//1:新しいプレハブ生成可能
 
 	// Use this for initialization
 	void Start () {
@@ -34,5 +33,9 @@ public class Base : MonoBehaviour {
 			newPosition = new Vector2(Random.Range(-2.5f, 2.5f), Random.Range(0, 10f) + playerRb2D.transform.position.y);
 			Instantiate(prefab, newPosition, Quaternion.identity);
 		}
+	}
+
+	public void screenUpdate() {
+		
 	}
 }
