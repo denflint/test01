@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Player: MonoBehaviour {
 
-	private string textToEdit = "";
+	private string textToEdit = "";					//デバッグ
 	private string debugText = "";
 	private string debugText2 = "";
-	public float speed = 5;
-	private Vector2 startPos, endPos, distance;
-	private Rigidbody2D rb2D;
-	private float moveTime = 0;
+	public float speed = 5;							//移動速度
+	private Vector2 startPos, endPos, distance;		//移動処理用
+	private Rigidbody2D rb2D;						//rb
+	private float moveTime = 0;						//移動時間(distance有効時間)
 	
 	// Use this for initialization
 	void Start () {
@@ -34,9 +34,9 @@ public class Player: MonoBehaviour {
 	}
 	void OnGUI () {
 	// テキストエリアを表示する
-		textToEdit = GUI.TextArea(new Rect(10, 10, 200, 20), textToEdit);
-		debugText = GUI.TextArea(new Rect(10, 40, 200, 20), debugText);
-		debugText2 = GUI.TextArea(new Rect(10, 70, 200, 20), debugText2);
+		textToEdit = GUI.TextArea(new Rect(10, 10, 100, 20), textToEdit);
+		debugText = GUI.TextArea(new Rect(10, 40, 100, 20), debugText);
+		debugText2 = GUI.TextArea(new Rect(10, 70, 100, 20), debugText2);
 	}
 
 	void GetMousePosition () {
@@ -45,11 +45,13 @@ public class Player: MonoBehaviour {
 	}
 
 	void GetMouseDistance () {
-		if(Input.GetMouseButtonDown(0)){
+		if(Input.GetMouseButtonDown(0))
+		{
 			//start_pos = Input.mousePosition;
 			startPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		}
-		if(Input.GetMouseButtonUp(0)){
+		if(Input.GetMouseButtonUp(0))
+		{
 			//end_pos = Input.mousePosition;
 			endPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			//距離計算
@@ -65,7 +67,9 @@ public class Player: MonoBehaviour {
 
 	void MovePlayer () {		
 		rb2D.AddForce(speed * (distance - rb2D.velocity));
-		debugText2 = "(" + distance.x.ToString() + "," + distance.y.ToString() + ")"; 
+		//debugText2 = "(" + distance.x.ToString() + "," + distance.y.ToString() + ")"; 
+		//debugText2 = "(" + Screen.width + "," + Screen.height + ")"; 
+		debugText2 = "(" + transform.position.x + "," + transform.position.y + ")"; 
 		//原則開始
 		if(moveTime > 50f)
 			distance -= distance / speed;
@@ -75,5 +79,9 @@ public class Player: MonoBehaviour {
 			 (moveTime > 50f) )
 			distance = Vector2.zero;
 
+	}
+
+	public Vector2 getDistance() {
+		return distance;
 	}
 }
