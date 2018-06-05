@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Base : MonoBehaviour {
 
-	private GameObject player;
-	private Rigidbody2D playerRb2D;
-	private Vector2 newPosition;
-	public GameObject prefab;
-	private bool createFlag;		//1:新しいプレハブ生成可能
-	private GameObject[] baseArray = new GameObject[2];	//プレハブ保存用
+	private GameObject player;			//プレイヤーオブジェクト
+	private Rigidbody2D playerRb2D;		//プレイヤーrb
+	private Vector2 newPosition;		//生成位置
+	public GameObject prefab;			//プレハブ
+	private bool createFlag;			//1:新しいプレハブ生成可能
 
 	// Use this for initialization
 	void Start () {
