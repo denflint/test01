@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Base : MonoBehaviour {
 
-	private GameObject player;			//プレイヤーオブジェクト
-	private Rigidbody2D playerRb2D;		//プレイヤーrb
-	private Vector2 newPosition;		//生成位置
-	public GameObject prefab;			//プレハブ
+	private GameObject player;			//プレイヤー参照用
+	private Rigidbody2D playerRb2D;		//プレイヤーのrb
+	private Vector2 newPosition;		//次の足場の生成位置
+	public GameObject prefab;			//プレハブ生成
 	private bool createFlag;			//1:新しいプレハブ生成可能
 
 	// Use this for initialization
