@@ -12,14 +12,11 @@ public class Player: MonoBehaviour {
 	private Rigidbody2D rb2D;						//rb
 	private float moveTime = 0;						//移動時間(distance有効時間)
 	private Vector2 originPos;						//スタート地点
-	private Vector2 nowPos, movePos;				//移動開始地点、終了地点
 
 	// Use this for initialization
 	void Start () {
 		rb2D = GetComponent<Rigidbody2D>();
 		originPos = transform.position;
-
-		nowPos = movePos = Vector2.zero;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -83,17 +80,8 @@ public class Player: MonoBehaviour {
 			 (-0.5 < rb2D.velocity.y) && (rb2D.velocity.y < 0.5)) &&
 			 (moveTime > 50f) )
 		{
-			movePos = transform.position;
 			distance = Vector2.zero;
 		}
 
-	}
-
-	public void screenUpdate() {
-		transform.position = new Vector2 (transform.position.x, transform.position.y - movePos.y);
-	}
-	
-	public Vector2 getMovePos() {
-		return movePos;
 	}
 }

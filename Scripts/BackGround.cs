@@ -5,11 +5,9 @@ using UnityEngine;
 public class BackGround : MonoBehaviour {
 
 	private GameObject CameraObj;		//カメラオブジェクト
-	private MainCamera CameraScr;		//カメラスクリプト
 	// Use this for initialization
 	void Start () {
 		CameraObj = GameObject.Find("Main Camera");
-		CameraScr = CameraObj.GetComponent<MainCamera>();
 	}
 	
 	// Update is called once per frame
