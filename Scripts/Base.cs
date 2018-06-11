@@ -17,12 +17,13 @@ public class Base : MonoBehaviour {
 		playerRb2D = player.GetComponent<Rigidbody2D>();
 
 		createFlag = true;
-
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+		if( (transform.position.y - player.transform.position.y) < -3f )
+			Destroy(gameObject);
 	}
 
 	void OnTriggerStay2D(Collider2D Player) {
@@ -30,8 +31,9 @@ public class Base : MonoBehaviour {
 		if(createFlag && (playerRb2D.velocity == Vector2.zero) )
 		{
 			createFlag = false;
-			newPosition = new Vector2(Random.Range(-2.5f, 2.5f), Random.Range(0, 10f) + playerRb2D.transform.position.y);
-			Instantiate(prefab, newPosition, Quaternion.identity);
+			newPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(5f, 9f) + player.transform.position.y);
+			var Obj =  Instantiate(prefab, newPosition, Quaternion.identity);
+			Obj.name = prefab.name;
 		}
 	}
 }

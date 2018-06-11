@@ -22,7 +22,9 @@ public class Player: MonoBehaviour {
 	void Update () {
 
 		GetMousePosition();
-		GetMouseDistance();
+
+		if(rb2D.velocity == Vector2.zero)
+			GetMouseDistance();
 
 		//時間管理
 		if(rb2D.velocity != Vector2.zero)
@@ -32,7 +34,7 @@ public class Player: MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		MovePlayer();
+			MovePlayer();
 	}
 	void OnGUI () {
 	// テキストエリアを表示する
