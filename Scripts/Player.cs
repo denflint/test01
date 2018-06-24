@@ -71,9 +71,9 @@ public class Player: MonoBehaviour {
 
 	void MovePlayer () {		
 		rb2D.AddForce(speed * (distance - rb2D.velocity));
-		//debugText2 = "(" + distance.x.ToString() + "," + distance.y.ToString() + ")"; 
+		debugText2 = "(" + distance.x.ToString() + "," + distance.y.ToString() + ")"; 
 		//debugText2 = "(" + Screen.width + "," + Screen.height + ")"; 
-		debugText2 = "(" + transform.position.x + "," + transform.position.y + ")"; 
+		//debugText2 = "(" + transform.position.x + "," + transform.position.y + ")"; 
 		//原則開始
 		if(moveTime > 50f)
 			distance -= distance / speed;

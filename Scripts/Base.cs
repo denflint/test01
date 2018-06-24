@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class Base : MonoBehaviour {
 
-	private GameObject player;			//プレイヤーオブジェクト
-	private Rigidbody2D playerRb2D;		//プレイヤーrb
-	private Vector2 newPosition;		//生成位置
-	public GameObject prefab;			//プレハブ
-	private bool createFlag;			//1:新しいプレハブ生成可能
+	private GameObject playerObj, gameManagerObj;		//各オブジェクト
+	private Rigidbody2D playerRb2D;				//各rb
+	private Vector2 newPosition;				//生成位置
+	public GameObject prefab;					//プレハブ
+	private bool createFlag;					//1:新しいプレハブ生成可能
+	private GameManager gameManagerScr;			//
 
 	// Use this for initialization
 	void Start () {
 		//Playerの情報を取得
-		player = GameObject.Find ("Player");
-		playerRb2D = player.GetComponent<Rigidbody2D>();
+		playerObj = GameObject.Find ("Player");
+		playerRb2D = playerObj.GetComponent<Rigidbody2D>();
+		gameManagerObj = GameObject.Find ("GameManager");
+		gameManagerScr = gameManagerObj.GetComponent<GameManager>();
 
 		createFlag = true;
 	}
@@ -22,7 +25,7 @@ public class Base : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if( (transform.position.y - player.transform.position.y) < -3f )
+		if( (transform.position.y - playerObj.transform.position.y) < -3f )
 			Destroy(gameObject);
 	}
 
@@ -31,9 +34,16 @@ public class Base : MonoBehaviour {
 		if(createFlag && (playerRb2D.velocity == Vector2.zero) )
 		{
 			createFlag = false;
-			newPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(5f, 9f) + player.transform.position.y);
-			var Obj =  Instantiate(prefab, newPosition, Quaternion.identity);
-			Obj.name = prefab.name;
+			gameManagerScr.setUpdateFlag();
+			createBase();
+			
 		}
+	}
+
+	void createBase() {
+		//生成位置決定
+		newPosition = new Vector2(Random.Range(-2f, 2f), Random.Range(5f, 9f) + playerObj.transform.position.y);
+		var Obj =  Instantiate(prefab, newPosition, Quaternion.identity);
+		Obj.name = prefab.name;
 	}
 }
