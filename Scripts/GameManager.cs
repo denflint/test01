@@ -6,15 +6,15 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
 	public Text scoreText;
 	private GameObject playerObj;
-	private float startPos, nowPos;
+	private float nowPos;
 	private float score, position;
 	private bool updateFlag;
 	// Use this for initialization
 	void Start () {
 		playerObj = GameObject.Find("Player");
-		startPos = playerObj.transform.position.y;
 		score = 0.0f;
 		updateFlag = false;
+		DontDestroyOnLoad (gameObject);
 	}
 	
 	// Update is called once per frame

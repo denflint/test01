@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player: MonoBehaviour {
 
@@ -12,6 +13,7 @@ public class Player: MonoBehaviour {
 	private Rigidbody2D rb2D;						//rb
 	private float moveTime = 0;						//移動時間(distance有効時間)
 	private Vector2 originPos;						//スタート地点
+	private bool loadFlag = false;
 
 	// Use this for initialization
 	void Start () {
@@ -29,13 +31,19 @@ public class Player: MonoBehaviour {
 		//時間管理
 		if(rb2D.velocity != Vector2.zero)
 			moveTime ++;
-		if(rb2D.velocity == Vector2.zero)
+		if(rb2D.velocity == Vector2.zero) {
 			moveTime = 0;
+		}
+		if (loadFlag && (rb2D.velocity == Vector2.zero)) {
+			loadFlag = false;
+			SceneManager.LoadScene("resultScene");
+		}
 	}
 
 	void FixedUpdate() {
 			MovePlayer();
 	}
+
 	void OnGUI () {
 	// テキストエリアを表示する
 		textToEdit = GUI.TextArea(new Rect(10, 10, 100, 20), textToEdit);
@@ -71,7 +79,8 @@ public class Player: MonoBehaviour {
 
 	void MovePlayer () {		
 		rb2D.AddForce(speed * (distance - rb2D.velocity));
-		debugText2 = "(" + distance.x.ToString() + "," + distance.y.ToString() + ")"; 
+		debugText2 = "loadFlag:" + loadFlag;
+		//debugText2 = "(" + distance.x.ToString() + "," + distance.y.ToString() + ")"; 
 		//debugText2 = "(" + Screen.width + "," + Screen.height + ")"; 
 		//debugText2 = "(" + transform.position.x + "," + transform.position.y + ")"; 
 		//原則開始
@@ -84,6 +93,9 @@ public class Player: MonoBehaviour {
 		{
 			distance = Vector2.zero;
 		}
+	}
 
+	public void setLoadFlag(bool active_) {
+		loadFlag = active_;
 	}
 }

@@ -10,12 +10,14 @@ public class Base : MonoBehaviour {
 	public GameObject prefab;					//プレハブ
 	private bool createFlag;					//1:新しいプレハブ生成可能
 	private GameManager gameManagerScr;			//
+	private Player playerScr;
 
 	// Use this for initialization
 	void Start () {
 		//Playerの情報を取得
 		playerObj = GameObject.Find ("Player");
 		playerRb2D = playerObj.GetComponent<Rigidbody2D>();
+		playerScr = playerObj.GetComponent<Player>();
 		gameManagerObj = GameObject.Find ("GameManager");
 		gameManagerScr = gameManagerObj.GetComponent<GameManager>();
 
@@ -34,10 +36,12 @@ public class Base : MonoBehaviour {
 		if(createFlag && (playerRb2D.velocity == Vector2.zero) )
 		{
 			createFlag = false;
-			gameManagerScr.setUpdateFlag();
+			playerScr.setLoadFlag(false);
 			createBase();
-			
 		}
+	}
+	void OnTriggerExit2D(Collider2D Other) {
+		playerScr.setLoadFlag(true);
 	}
 
 	void createBase() {
